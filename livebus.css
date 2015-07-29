@@ -5,3 +5,10 @@ body {
 html, body, #map {
     height: 100%;
 }
+.bus {
+	background: url(bus.svg) no-repeat top left;
+	background-size: contain;
+	-moz-transition: all .5s linear;
+    -webkit-transition: all .5s linear;
+    transition: all .5s linear;
+}
