@@ -12,3 +12,5 @@ mquandalle:bower
 
 http
 underscore
+mrt:firebase
+meteorhacks:async

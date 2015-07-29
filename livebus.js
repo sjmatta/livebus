@@ -73,19 +73,10 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
- var refreshData = function() {
-    HTTP.call('GET', 'https://publicdata-transit.firebaseio.com/dc-circulator.json', function(error, result) {
-      var vehicles = result.data.vehicles;
-      _.each(vehicles, function(vehicle) {
-        Vehicles.upsert({id: vehicle.id}, { $set: {
-            lat: vehicle.lat, lon: vehicle.lon, heading: vehicle.heading, route: vehicle.routeTag
-          }
-        });
-      });
-    });
-  };
-
-  Meteor.startup(function() {
-    Meteor.setInterval(refreshData, 500);
+  var addVehicle = Meteor.bindEnvironment(function(vehicle) {
+      Vehicles.upsert({ id: vehicle.val().id }, { $set: { lat: vehicle.val().lat, lon: vehicle.val().lon, heading: vehicle.val().heading }});
   });
+
+  var transitRef = new Firebase('https://publicdata-transit.firebaseio.com/dc-circulator/vehicles');
+  transitRef.on('child_changed', addVehicle);
 }
