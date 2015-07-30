@@ -30,10 +30,10 @@ minifiers@1.1.5
 minimongo@1.0.8
 mobile-status-bar@1.0.3
 mongo@1.1.0
-mquandalle:bower@1.4.1_1
 mrt:firebase@0.6.15
 observe-sequence@1.0.6
 ordered-dict@1.0.3
+pauloborges:mapbox@2.1.5
 random@1.0.3
 reactive-dict@1.1.0
 reactive-var@1.0.5

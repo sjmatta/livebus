@@ -1,0 +1,28 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker build -t sjmatta/livebus .
+
+database:
+  override:
+    - docker run -d --name mongo mongo
+
+test:
+  override:
+    - curl https://install.meteor.com | sh
+    - docker run -d --name livebus --link mongo:mongo -e ROOT_URL=http://localhost -p 80:80 sjmatta/livebus
+    - sleep 5s
+    - curl --retry 10 --retry-delay 5 -v http://localhost
+
+deployment:
+  master:
+    branch: master
+    commands:
+      - docker login -e "$HUB_EMAIL" -u "$HUB_USER" -p "$HUB_PASS"
+      - docker push sjmatta/livebus
+      - sudo pip install tutum
+      - tutum stack update -f tutum.yml livebus-stack
+      - tutum service redeploy livebus-app

@@ -7,7 +7,6 @@
 meteor-platform
 autopublish
 d3js:d3
-mquandalle:bower
 
 
 http
@@ -15,3 +14,4 @@ underscore
 mrt:firebase
 meteorhacks:async
 coffeescript
+pauloborges:mapbox@2.1.5

@@ -1,7 +1,0 @@
-{
-	"name": "livebus",
-	"version": "0.1",
-	"dependencies": {
-		"mapbox.js": "2.2.1"
-	}
-}

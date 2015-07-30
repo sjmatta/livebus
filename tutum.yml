@@ -1,0 +1,25 @@
+# warning: some modifications to this file will result in production downtime
+# please see the comments in individual sections for details
+
+livebus-proxy:
+# modifying this section will result in a few seconds of downtime for the app
+  image: "tutum/haproxy"
+  roles:
+    - global
+  links:
+    - livebus-app
+  ports:
+    - "80:80"
+  expose:
+    - "80"
+livebus-mongo:
+# modifying this section will result in a few seconds of downtime for the app
+  image: "mongo"
+livebus-app:
+# modifications can be made to this section without downtime
+  image: "sjmatta/livebus"
+  target_num_containers: 2
+  links:
+    - livebus-mongo:mongo
+  environment:
+    ROOT_URL: http://localhost
